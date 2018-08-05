@@ -19,5 +19,25 @@ func main() {
 }
 
 func CalculateHouses(input string) int {
-	return 0
+	type xy struct {
+		X, Y int
+	}
+
+	current := xy{0,0}
+	trip := map[xy]int{current: 1}
+
+	for _, c := range input {
+		switch string(c) {
+		case "^":
+			current.Y++
+		case ">":
+			current.X++
+		case "v":
+			current.Y--
+		case "<":
+			current.X--
+		}
+		trip[current]++
+	}
+	return len(trip)
 }
